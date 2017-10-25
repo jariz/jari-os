@@ -1,0 +1,27 @@
+body {
+    background: #000;
+}
+
+#screen_container, #screen_container canvas {
+    margin: 0 auto;
+}
+
+#screen_container canvas {
+    max-height:100vh;
+}
+
+#screen_container > div {
+    max-width: 1024px;
+}
+
+#screen_container {
+    transition: transform .25s, opacity .25s;
+    transform: scaleY(0) scaleX(0.5);
+    opacity: 0;
+}
+
+#screen_container.online {
+    transition: transform .25s, opacity .25s;
+    transform: scaleY(1) scaleX(1);
+    opacity: 1;
+}

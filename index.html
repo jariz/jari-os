@@ -2,9 +2,20 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>$Title$</title>
+        <title>Title</title>
+        <link href="css/reset.css" rel="stylesheet" />
+        <link href="css/style.css" rel="stylesheet" />
     </head>
     <body>
-        $END$
+        <div id="screen_container">
+            <div style="white-space: pre; font: 14px monospace; line-height: 14px"></div>
+            <canvas style="display: none"></canvas>
+        </div>
+
+        <button id="dumpstate">dump state</button>
+
+        <script async defer src="js/libv86.js"></script>
+        <!--<script async defer src="loader.js"></script>-->
+        <script async defer src="js/init.js"></script>
     </body>
 </html>

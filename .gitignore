@@ -1,1 +1,5 @@
-images/*
+images/
+.idea/
+w95/
+certs/
+node_modules/

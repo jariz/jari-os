@@ -1,7 +1,11 @@
 {
-    "name": "$package_name$",
+    "name": "jari-os",
     "version": "0.0.1",
+    "scripts": {
+        "start": "http2-server .",
+        "cert": "http-server --generate-cert"
+    },
     "dependencies": {
-        $END$
+        "static-http2-server": "^1.6.0"
     }
 }
