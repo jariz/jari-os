@@ -3,30 +3,55 @@
         <title>JARI ZWARTS</title>
 
         <script language="VBScript">
-            MsgBox "Something went wrong while displaying the fancy 40mb web 6.0 website. Falling back to old website; it's much better eitherway.",16,"JARI.IO: Error!"
+            Sub WriteToPort(Value)
+                Const ForWriting = 2, TriStateFalse = 0
+                Dim fso, f
+                
+                Set fso = CreateObject("Scripting.FileSystemObject")
+                Set f = fso.OpenTextFile("COM1:", ForWriting, False, TriStateFalse)
+                f.Write Value
+                f.Close
+            End Sub
         </script>
 
     </head>
-    <body BACKGROUND="img/Circles.bmp">
+    <!--<body BACKGROUND="img/Circles.bmp">-->
+    <body bgcolor="lightgray">
         <img src="img/construction.gif" align="left">
 
         <img src="img/construction.gif" align="right">
         <center>
-            <h1><blink><font color="yellow">Jari Zwarts</font></blink></h1>
-            <p><font color="red">Professional cyberspace <i>builder</i></font></p>
+            <h1><blink><font color="blue">Jari Zwarts</font></blink></h1>
+            <p><b><font color="red">Professional cyberspace <i>builder</i></font></b></p>
         </center>
         <br>
         <center>
-            <img src="img/KDancingbaby.gif">
+            <p>
+                <img src="img/ns_logo.gif">
+                <img src="img/notepad.gif">
+                <img src="img/noframes.gif">
+            </p>
         </center>
-        <p>
-            <img src="img/ns_logo.gif">
-            <img src="img/notepad.gif">
-            <img src="img/noframes.gif">
-        </p>
+        
+        <h2><font color="blue">On the interwebs</font></h2>
+        <ul>
+            <li>
+                <a href="javascript:void(0)" onclick="WriteToPort('github;')">GitHub</a>
+            </li>
+            <li>
+                <a href="javascript:void(0)" onclick="WriteToPort('dribbble;')">Dribble</a>
+            </li>
+            <li>
+                <a href="javascript:void(0)" onclick="WriteToPort('twitter;')">Twitter</a>
+            </li>
+        </ul>
 
-        <h2><font color="white">Personal projects</font></h2>
-        <p><font color="yellow">Dial up to the internet from your own computer to visit these websites</font> </p>
+        <!--<h2><font color="red">Selected works</font></h2>-->
+        <!--<h3>IDFA</h3>-->
+        <!--<h3>Ajax.nl - App</h3>-->
+        <!--<h3>Centraal Beheer - Risicoscan</h3>-->
+
+        <h2><font color="blue">Personal projects</font></h2>
         <table border="1" bgcolor="navy">
             <thead>
                 <tr>
@@ -47,7 +72,35 @@
             <tbody>
                 <tr>
                     <td>
-                        <font color="red">Quarry</font>
+                        <font color="red">Batti</font> <font color="yellow">WIP</font>
+                    </td>
+                    <td>
+                        <font color="red">Handsfree bluetooth device battery indication app for macOS.</font>
+                    </td>
+                    <td>
+                        <font color="red">2018+</font>
+                    </td>
+                    <td>
+                        <a href="javascript:void(0)" onclick="WriteToPort('quarry;')"><font color="white">Quarry</font></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <font color="red">Rivulet</font> <font color="yellow">WIP</font>
+                    </td>
+                    <td>
+                        <font color="red">Your own personal streaming service.</font>
+                    </td>
+                    <td>
+                        <font color="red">2018+</font>
+                    </td>
+                    <td>
+                        <a href="javascript:void(0)" onclick="WriteToPort('quarry;')"><font color="white">Quarry</font></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <font color="red">Quarry</font> <font color="yellow">WIP</font>
                     </td>
                     <td>
                         <font color="red">View stories from across all your favorite sources, ranked intelligently.</font>
@@ -56,11 +109,9 @@
                         <font color="red">2017+</font>
                     </td>
                     <td>
-                        <font color="white">quaryapp.com</font>
+                        <a href="javascript:void(0)" onclick="WriteToPort('quarry;')"><font color="white">Quarry</font></a>
                     </td>
                 </tr>
-            </tbody>
-            <tbody>
                 <tr>
                     <td>
                         <font color="red">Noti</font>
@@ -72,10 +123,29 @@
                         <font color="red">2016</font>
                     </td>
                     <td>
-                        <font color="white">noti.center</font>
+                        <a href="javascript:void(0)" onclick="WriteToPort('noti;')"><font color="white">noti.center</font></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <font color="red">Vibrant.js</font>
+                    </td>
+                    <td>
+                        <font color="red">Hugely popular (4.2k ★'s) javascript library that enables developers to grab prominent (or <i>vibrant</i>, if you will) colors from an image.</font>
+                    </td>
+                    <td>
+                        <font color="red">2015</font>
+                    </td>
+                    <td>
+                        <a href="javascript:void(0)" onclick="WriteToPort('vibrant;')"><font color="white">noti.center</font></a>
                     </td>
                 </tr>
             </tbody>
         </table>
+        <br>
+        <br>
+        <center>
+            <img src="img/KDancingbaby.gif">
+        </center>
     </body>
 </html>

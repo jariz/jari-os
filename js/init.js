@@ -6,7 +6,7 @@ window.onload = function () {
         memory_size: 32 * 1024 * 1024,
         screen_container: document.getElementById('screen_container'),
         hda: {
-            url: 'images/W95-MOD.IMG',
+            url: 'images/W98-MOD.IMG',
             async: useState,
             size: 231 * 1024 * 1024,
         },
@@ -35,10 +35,13 @@ window.onload = function () {
         os_uses_mouse = is_enabled;
     });
 
+    emulator.add_listener("serial0-output-char", function(char) {
+        console.log(char);
+    });
+
     document.getElementById('screen_container').onclick = function () {
         emulator.lock_mouse();
-        emulator.screen_go_fullscreen();
-        console.log('stuiter met die billen als skippy bal')
+        // emulator.screen_go_fullscreen();
 
         // todo mobile stuff
     };

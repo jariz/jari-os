@@ -9,6 +9,12 @@ Because I can.
 ## How
 [v86](https://github.com/copy/v86) & a modified boot image so we can get files into the emulator.
 
+## No, I mean, how on earth did you manage to do this?
+Like most of the earlydays browser scripting, VBScript is insanely permissive.   
+You can't really imagine it nowadays, but the user is only prompted with a tiny warning that the script's that is about to run 'might be dangerous'.  
+Mind you, this script can do anything a normal program can, straight from your browser. 
+As so, it means we can directly write to the serial port, which gives us a way to communicate back to the hypervisor.
+
 ## Running
 Because of the amount of requests the emulator makes, it is fairly vital to run the site on http2.  
 Upon first cloning this repo, run `npm run cert` to generate certificates.  
@@ -34,5 +40,4 @@ Save it as `v86state.bin` in the images folder.
 
 ## Once booted
 
-- Open netscape from `C:\Disk\Navigator\Program`
 - Navigate to `C:\Disk\PORTFOLIO\index.html`
