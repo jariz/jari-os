@@ -1,99 +1,157 @@
 window.onload = function () {
-    var os_uses_mouse = false;
-    var useState = window.location.search !== '?forceDisk';
+    let osUsesMouse = false;
+    const useState = window.location.search !== '?forceDisk';
+    const screenContainer = document.getElementById('screen_container');
 
-    var settings = {
+    let settings = {
         memory_size: 32 * 1024 * 1024,
-        screen_container: document.getElementById('screen_container'),
+        screen_container: screenContainer,
         hda: {
             url: 'images/W98-MOD.IMG',
             async: useState,
-            size: 231 * 1024 * 1024,
+            size: 314572800
         },
-        autostart: true,
+        autostart: true
     };
 
     if (useState) {
         settings.initial_state = {
             url: './images/v86state.bin',
-            size: 41168,
+            size: 41168
         };
     } else {
         settings = Object.assign(settings, {
             bios: {
-                url: './bios/seabios.bin',
+                url: './bios/seabios.bin'
             },
             vga_bios: {
-                url: './bios/vgabios.bin',
-            },
+                url: './bios/vgabios.bin'
+            }
         });
     }
 
     const emulator = window.emulator = new V86Starter(settings);
 
-    emulator.add_listener('mouse-enable', function (is_enabled) {
-        os_uses_mouse = is_enabled;
+    emulator.add_listener('mouse-enable', (is_enabled) => {
+        osUsesMouse = is_enabled;
     });
 
-    emulator.add_listener("serial0-output-char", function(char) {
-        console.log(char);
+    let buffer = '';
+    emulator.add_listener('serial0-output-char', (char) => {
+        if (char === ';') {
+            const links = {
+                // links
+                'github': 'https://github.com/jariz',
+                'dribbble': 'https://dribbble.com/jariz',
+                'twitter': 'https://twitter.com/JariZwarts',
+
+                // work
+                'quarry': 'https://github.com/quarryapp/',
+                'batti': 'https://github.com/jariz/BattiDaemon',
+                'rivulet': 'https://github.com/jariz/rivulet',
+                'noti': 'https://noti.center/',
+                'vibrant': 'http://jariz.github.io/vibrant.js/'
+            };
+
+            // remove non-ascii chars
+            const link = buffer.split('')
+                .filter(a => a.charCodeAt(0) >= 33 && a.charCodeAt(0) <= 126)
+                .join('');
+
+            buffer = '';
+            if (!(link in links)) {
+                console.error(`command ${link} is not a valid link`);
+                return;
+            }
+
+            emulator.destroy();
+            glitchCanvas(() => {
+                window.location = links[link];
+            });
+        } else {
+            buffer += char;
+        }
     });
 
-    document.getElementById('screen_container').onclick = function () {
+    const glitchCanvas = (callback) => {
+        const cvs = screenContainer.querySelector('canvas');
+        const ctx = cvs.getContext('2d');
+        const imageData = ctx.getImageData(0, 0, cvs.width, cvs.height);
+        let iterations = -1;
+        const maxIterations = 10;
+
+        const glitchIt = () => {
+            iterations++;
+
+            glitch({
+                seed: 25,
+                quality: 30,
+                amount: 35,
+                iterations
+            })
+                .fromImageData(imageData)
+                .toImageData()
+                .then((imageData) => {
+                    ctx.putImageData(imageData, 0, 0);
+
+                    if (iterations === maxIterations) {
+                        // do callback but keep glitching whilst navigating
+                        callback();
+                    }
+
+                    window.requestAnimationFrame(glitchIt);
+                });
+        };
+
+        window.requestAnimationFrame(glitchIt);
+    };
+
+    document.getElementById('screen_container').onclick = () => {
         emulator.lock_mouse();
-        // emulator.screen_go_fullscreen();
 
         // todo mobile stuff
     };
 
-    function dump_file(ab, name)
-    {
-        if(!(ab instanceof Array))
-        {
+    const dump_file = (ab, name) => {
+        if (!(ab instanceof Array)) {
             ab = [ab];
         }
 
-        var blob = new Blob(ab);
+        const blob = new Blob(ab);
         download(blob, name);
-    }
+    };
 
-    function download(file_or_blob, name)
-    {
-        var a = document.createElement('a');
+    const download = (file_or_blob, name) => {
+        const a = document.createElement('a');
         a['download'] = name;
         a.href = window.URL.createObjectURL(file_or_blob);
         a.dataset['downloadurl'] = ['application/octet-stream', a['download'], a.href].join(':');
 
-        if(document.createEvent)
-        {
-            var ev = document.createEvent('MouseEvent');
+        if (document.createEvent) {
+            const ev = document.createEvent('MouseEvent');
             ev.initMouseEvent('click', true, true, window,
                 0, 0, 0, 0, 0, false, false, false, false, 0, null);
             a.dispatchEvent(ev);
         }
-        else
-        {
+        else {
             a.click();
         }
 
         window.URL.revokeObjectURL(a.href);
-    }
+    };
 
     document.getElementById('dumpstate').onclick = () =>
-        emulator.save_state(function(error, result)
-        {
-            if(error)
-            {
+        emulator.save_state(function (error, result) {
+            if (error) {
                 console.log(error.stack);
                 console.log('Couldn\'t save state: ', error);
             }
-            else
-            {
+            else {
                 dump_file(result, 'v86state.bin');
             }
         });
 
     emulator.add_listener('screen-set-mode', (isGraphic) => {
-        isGraphic && document.getElementById('screen_container').classList.add('online')
-    })
+        isGraphic && screenContainer.classList.add('online');
+    });
 };

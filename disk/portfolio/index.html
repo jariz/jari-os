@@ -12,23 +12,27 @@
                 f.Write Value
                 f.Close
             End Sub
+            
+            ' First initial write that does nothing besides making sure we don't get the IE prompt again.
+            WriteToPort("hi;")
         </script>
-
     </head>
-    <!--<body BACKGROUND="img/Circles.bmp">-->
-    <body bgcolor="lightgray">
+    <body bgcolor="#d3d3d3" background="#d3d3d3">
         <img src="img/construction.gif" align="left">
 
         <img src="img/construction.gif" align="right">
         <center>
-            <h1><blink><font color="blue">Jari Zwarts</font></blink></h1>
+            <h1>
+                <font color="#071df2">J</font><font color="#201add">a</font><font color="#4516b9">r</font><font color="#8e0e71">i</font>
+                <font color="#ba0845">Z</font><font color="#cf0630">w</font><font color="#ee0212">a</font><font color="#f80107">r</font><font color="#f80107">t</font><font color="#f80107">s</font>
+            </h1>
             <p><b><font color="red">Professional cyberspace <i>builder</i></font></b></p>
         </center>
         <br>
         <center>
             <p>
                 <img src="img/ns_logo.gif">
-                <img src="img/notepad.gif">
+                <img height="31" src="img/notepad.gif">
                 <img src="img/noframes.gif">
             </p>
         </center>
@@ -39,17 +43,32 @@
                 <a href="javascript:void(0)" onclick="WriteToPort('github;')">GitHub</a>
             </li>
             <li>
-                <a href="javascript:void(0)" onclick="WriteToPort('dribbble;')">Dribble</a>
+                <a href="javascript:void(0)" onclick="WriteToPort('dribbble;')">Dribbble</a>
             </li>
             <li>
                 <a href="javascript:void(0)" onclick="WriteToPort('twitter;')">Twitter</a>
             </li>
         </ul>
 
-        <!--<h2><font color="red">Selected works</font></h2>-->
-        <!--<h3>IDFA</h3>-->
-        <!--<h3>Ajax.nl - App</h3>-->
-        <!--<h3>Centraal Beheer - Risicoscan</h3>-->
+        <h2><font color="red">I wrote code for</font></h2>
+        <table border="0">
+            <tbody>
+            <tr>
+                <td>
+                    <img src="img/tmobile.gif" />
+                </td>
+                <td>
+                    <img src="img/ajax.gif" />
+                </td>
+                <td>
+                    <img src="img/idfa.gif" />
+                </td>
+                <td>
+                    <img src="img/achmea.gif" />
+                </td>
+            </tr>
+            </tbody>
+        </table>
 
         <h2><font color="blue">Personal projects</font></h2>
         <table border="1" bgcolor="navy">
@@ -81,7 +100,7 @@
                         <font color="red">2018+</font>
                     </td>
                     <td>
-                        <a href="javascript:void(0)" onclick="WriteToPort('quarry;')"><font color="white">Quarry</font></a>
+                        <a href="javascript:void(0)" onclick="WriteToPort('batti;')"><font color="white">Repo</font></a>
                     </td>
                 </tr>
                 <tr>
@@ -95,7 +114,7 @@
                         <font color="red">2018+</font>
                     </td>
                     <td>
-                        <a href="javascript:void(0)" onclick="WriteToPort('quarry;')"><font color="white">Quarry</font></a>
+                        <a href="javascript:void(0)" onclick="WriteToPort('rivulet;')"><font color="white">Repo</font></a>
                     </td>
                 </tr>
                 <tr>
@@ -109,7 +128,7 @@
                         <font color="red">2017+</font>
                     </td>
                     <td>
-                        <a href="javascript:void(0)" onclick="WriteToPort('quarry;')"><font color="white">Quarry</font></a>
+                        <a href="javascript:void(0)" onclick="WriteToPort('quarry;')"><font color="white">Repo</font></a>
                     </td>
                 </tr>
                 <tr>
@@ -131,13 +150,13 @@
                         <font color="red">Vibrant.js</font>
                     </td>
                     <td>
-                        <font color="red">Hugely popular (4.2k ★'s) javascript library that enables developers to grab prominent (or <i>vibrant</i>, if you will) colors from an image.</font>
+                        <font color="red">Hugely popular (4.2k &star;'s) javascript library that enables developers to grab prominent (or <i>vibrant</i>, if you will) colors from an image.</font>
                     </td>
                     <td>
                         <font color="red">2015</font>
                     </td>
                     <td>
-                        <a href="javascript:void(0)" onclick="WriteToPort('vibrant;')"><font color="white">noti.center</font></a>
+                        <a href="javascript:void(0)" onclick="WriteToPort('vibrant;')"><font color="white">Website</font></a>
                     </td>
                 </tr>
             </tbody>

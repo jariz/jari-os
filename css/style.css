@@ -7,11 +7,11 @@ body {
 }
 
 #screen_container canvas {
-    max-height:100vh;
+    height:100vh;
 }
 
 #screen_container > div {
-    max-width: 1024px;
+    /*max-width: 1024px;*/
 }
 
 #screen_container {
