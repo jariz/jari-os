@@ -1,4 +1,4 @@
-window.onload = function () {
+window.onload = () => {
     let osUsesMouse = false;
     const useState = window.location.search !== '?forceDisk';
     const screenContainer = document.getElementById('screen_container');
@@ -64,7 +64,7 @@ window.onload = function () {
                 return;
             }
 
-            emulator.destroy();
+            emulator.stop();
             glitchCanvas(() => {
                 window.location = links[link];
             });
@@ -78,7 +78,7 @@ window.onload = function () {
         const ctx = cvs.getContext('2d');
         const imageData = ctx.getImageData(0, 0, cvs.width, cvs.height);
         let iterations = -1;
-        const maxIterations = 10;
+        const maxIterations = 5;
 
         const glitchIt = () => {
             iterations++;
@@ -105,6 +105,43 @@ window.onload = function () {
 
         window.requestAnimationFrame(glitchIt);
     };
+    
+    const intro = document.getElementById('intro');
+    window.asciiAnim = input => {
+        intro.style.opacity = 0;
+        const shiftByInitial = 150;
+        let shiftBy = shiftByInitial;
+
+        const codes = input
+            .split('')
+            .map(ch => ch.charCodeAt(0))
+        
+        const anim = () => {
+            intro.style.opacity = 1 - (shiftBy / shiftByInitial)
+            
+            const inner = codes
+                .map(code => {
+                    if(shiftBy !== 0 && Math.round(Math.random() * 100) === 5) {
+                        return String.fromCharCode(0);
+                    }
+                    
+                    if(code >= 33) {
+                        code += shiftBy;
+                    }
+                    
+                    return String.fromCharCode(code);
+                })
+                .join('');
+            
+            intro.innerText = inner;
+            shiftBy--;
+            if(shiftBy !== -1) {
+                // setTimeout(() => window.requestAnimationFrame(anim), 10);
+                window.requestAnimationFrame(anim)
+            }
+        }
+        window.requestAnimationFrame(anim)
+    }
 
     document.getElementById('screen_container').onclick = () => {
         emulator.lock_mouse();
@@ -140,8 +177,8 @@ window.onload = function () {
         window.URL.revokeObjectURL(a.href);
     };
 
-    document.getElementById('dumpstate').onclick = () =>
-        emulator.save_state(function (error, result) {
+    window.dumpState = () =>
+        emulator.save_state((error, result) => {
             if (error) {
                 console.log(error.stack);
                 console.log('Couldn\'t save state: ', error);
